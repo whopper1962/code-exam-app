@@ -22,4 +22,4 @@ use App\Http\Controllers\ExamController;
 
 
 // Exams
-Route::get('/exams', [ExamController::class, 'index']);
+Route::get('/exams/{exam_id}', [ExamController::class, 'index']);

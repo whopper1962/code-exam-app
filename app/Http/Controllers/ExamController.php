@@ -15,6 +15,9 @@ class ExamController extends Controller
         Question $question
     ) {
         $questions = $question->where('exam_id', '=', $exam_id)->get();
+        if (!count($questions)) {
+            abort(404);
+        }
 
         $response = (object) [
             'questions' => $questions

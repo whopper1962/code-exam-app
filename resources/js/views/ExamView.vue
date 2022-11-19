@@ -2,9 +2,9 @@
   <div>
     <ExamProgressBreadcrumbs
       v-model="selectedExamIndex"
-      :exams="exams"
+      :exams="questions"
     />
-    <template v-for="(exam, index) in exams">
+    <template v-for="(exam, index) in questions">
       <div
         class="exam-main-content"
         v-show="selectedExamIndex === index"
@@ -14,17 +14,21 @@
         <div class="exam-explanation-box">
           {{ exam.explanation }}
         </div>
-        <CodeEditor
-          v-model="inputed[index].code"
-        />
-        <AppTextarea
-          :rows="6"
-          v-model="inputed[index].memo"
-        />
+        <template v-if="inputed[index]">
+          <CodeEditor
+            v-model="inputed[index].code"
+          />
+        </template>
+        <template v-if="inputed[index]">
+          <AppTextarea
+            :rows="6"
+            v-model="inputed[index].memo"
+          />
+        </template>
       </div>
     </template>
     <SubmitExamView
-      v-show="selectedExamIndex === exams.length"
+      v-show="selectedExamIndex === questions.length"
       @submit="submitExam()"
     />
   </div>
@@ -45,52 +49,37 @@ export default {
   },
   data () {
     return {
-      exams: [
-        {
-          title: 'Variable',
-          explanation: 'As in above comment - false alarm. Somewhere between Docker image caching and npm, the sass-loader and node-sass modules were reported as being installed, while not actually being installed. The usual rm node_modules and rebuilding with no cache trick fixed it. As in above comment - false alarm. Somewhere between Docker image caching and npm, the sass-loader and node-sass modules were reported as being installed, while not actually being installed. The usual rm node_modules and rebuilding with no cache trick fixed it. As in above comment - false alarm. Somewhere between Docker image caching and npm, the sass-loader and node-sass modules were reported as being installed, while not actually being installed. The usual rm node_modules and rebuilding with no cache trick fixed it.'
-        },
-        {
-          title: 'Function',
-          explanation: 'Solve this quiz.'
-        },
-        {
-          title: 'Class',
-          explanation: 'Solve this quiz.'
-        },
-        {
-          title: 'Title3',
-          explanation: 'Solve this quiz.'
-        },
-        {
-          title: 'Title4',
-          explanation: 'Solve this quiz.'
-        },
-        {
-          title: 'Title5',
-          explanation: 'Solve this quiz.'
-        }
-      ],
+      questions: [],
       inputed: [],
-      selectedExamIndex: 0
+      selectedExamIndex: 0,
+      examId: null
     };
   },
   created () {
+    this.examId = this.$route.params.exam_id;
     this.getExams();
   },
   methods: {
     getExams () {
-      for (let i = 0, len = this.exams.length; i < len; i++) {
-        this.inputed.push({
-          memo: '',
-          code: 'console.log("Hello Code-Exam!");'
-        });
-      }
-      axios.get('/api/exams/').then((response) => {
+      axios.get(`/api/exams/${this.examId}`)
+      .then((response) => {
         console.log(response.data);
+        this.setQuestions(response.data.questions);
       }).catch((error) => {
         console.error(error);
       });
+    },
+    setQuestions (questions) {
+      for (const [index, question] of questions.entries()) {
+        this.$set(this.questions, index, {
+          title: question.title,
+          explanation: question.content
+        });
+        this.inputed.push({
+          memo: '',
+          code: question.default_code
+        });
+      }
     },
     submitExam () {
       console.error('Submitted!');

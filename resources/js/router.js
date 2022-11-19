@@ -10,7 +10,7 @@ const routes = [
     component: WelcomeView
   },
   {
-    path: '/exams',
+    path: '/exams/:exam_id',
     name: 'EXAM_VIEW',
     component: ExamView
   },

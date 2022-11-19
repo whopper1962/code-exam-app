@@ -33,7 +33,7 @@
             <div class="profile-icon-wrapper">
               <img
                 class="profile-icon"
-                src="whopper.png"
+                src="/whopper.png"
               />
             </div>
           </li>

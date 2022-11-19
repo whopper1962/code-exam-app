@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->unsignedBigInteger('exam_id');
             $table->string('title');
             $table->string('content');
-            $table->string('default_code')->nullable();
+            $table->text('default_code')->nullable();
             // $table->string('created_by_id')->nullable();
             // $table->string('updated_by_id')->nullable();
             $table->timestamps();

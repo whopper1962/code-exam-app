@@ -15,7 +15,13 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 7; $i++) {
+        Question::create([
+            'exam_id' => 1,
+            'title' => "クラスの継承",
+            'content' => "既存のクラスを継承したクラス「King」を作成し、インスタンス化をしてください",
+            'default_code' => "class Legend {\n constructor (firstName, lastName) {\n this.firstName = firstName;\n this.lastName = lastName;\n }\n hello () {\n console.log('Hello Class!');\n }\n}\n\nconst legend1 = new Legend('Brendan', 'Eich');\nconst legend2 = new Legend('Linus', 'Torvalds');\nconst legend3 = new Legend('Ryan', 'Dahl');"
+        ]);
+        for ($i = 1; $i < 7; $i++) {
             Question::create([
                 'exam_id' => 1,
                 'title' => "Test question$i",

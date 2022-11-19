@@ -1,6 +1,7 @@
 import VueRouter from "vue-router";
 import WelcomeView from './views/WelcomeView';
 import ExamView from './views/ExamView';
+import ExamListView from './views/ExamListView';
 import TextbookRegistrationView from './views/TextbookRegistrationView'
 
 const routes = [
@@ -8,6 +9,11 @@ const routes = [
     path: '/',
     name: 'WELCOME_VIEW',
     component: WelcomeView
+  },
+  {
+    path: '/exams',
+    name: 'EXAM_LIST_VIEW',
+    component: ExamListView
   },
   {
     path: '/exams/:exam_id',

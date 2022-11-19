@@ -52,7 +52,7 @@ export default {
     headerItems() {
       return [
         {
-          name: "EXAM_VIEW",
+          name: "EXAM_LIST_VIEW",
           label: "Exams",
         },
         {

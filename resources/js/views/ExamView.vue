@@ -1,9 +1,11 @@
 <template>
   <div>
-    <ExamProgressBreadcrumbs
-      v-model="selectedExamIndex"
-      :exams="questions"
-    />
+    <template v-if="!isLoading">
+      <ExamProgressBreadcrumbs
+        v-model="selectedExamIndex"
+        :exams="questions"
+      />
+    </template>
     <template v-for="(exam, index) in questions">
       <div
         class="exam-main-content"
@@ -27,10 +29,12 @@
         </template>
       </div>
     </template>
-    <SubmitExamView
-      v-show="selectedExamIndex === questions.length"
-      @submit="submitExam()"
-    />
+    <template v-if="!isLoading">
+      <SubmitExamView
+        v-show="selectedExamIndex === questions.length"
+        @submit="submitExam()"
+      />
+    </template>
   </div>
 </template>
 
@@ -52,7 +56,8 @@ export default {
       questions: [],
       inputed: [],
       selectedExamIndex: 0,
-      examId: null
+      examId: null,
+      isLoading: false
     };
   },
   created () {
@@ -61,6 +66,7 @@ export default {
   },
   methods: {
     getExams () {
+      this.isLoading = true;
       axios.get(`/api/exams/${this.examId}`)
       .then((response) => {
         console.log(response.data);
@@ -70,6 +76,8 @@ export default {
         this.$router.push({
           name: 'WELCOME_VIEW'
         });
+      }).finally(() => {
+        this.isLoading = false;
       });
     },
     setQuestions (questions) {

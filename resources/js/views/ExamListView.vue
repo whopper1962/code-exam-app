@@ -124,6 +124,7 @@ table {
   th {
     background-color: lighten($baseColor, 50%);
     font-weight: 300;
+    font-weight: bold;
   }
 
   tr {

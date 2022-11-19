@@ -79,6 +79,9 @@ $link-hover-color: rgb(146, 146, 146);
 .navigation {
   height: $nav-height;
   background: $nav-background;
+  position: sticky;
+  z-index: 999;
+  top: 0;
 }
 // Logo and branding
 .brand {

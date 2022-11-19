@@ -9,7 +9,7 @@ use App\Models\Question;
 
 class ExamController extends Controller
 {
-    public function index (
+    public function getExamDetails (
         $exam_id,
         Exam $exam,
         Question $question

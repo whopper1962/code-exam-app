@@ -18,6 +18,12 @@ const routes = [
     path: '/textbook_registration',
     name: 'TEXTBOOK_REGISTRATION',
     component: TextbookRegistrationView
+  },
+  {
+    path: '*',
+    redirect: {
+      name: 'WELCOME_VIEW'
+    }
   }
 ];
 

@@ -9,6 +9,13 @@ use App\Models\Question;
 
 class ExamController extends Controller
 {
+    public function index (
+        Exam $exam,
+        Question $question
+    ) {
+        return $exam->get();
+    }
+
     public function getExamDetails (
         $exam_id,
         Exam $exam,

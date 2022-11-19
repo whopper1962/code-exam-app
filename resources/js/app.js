@@ -10,9 +10,9 @@ Vue.config.productionTip = false;
 
 // Import fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faLaptopCode, faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faLaptopCode, faRocket, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-const faIcons = [faRocket, faLaptopCode];
+const faIcons = [faRocket, faLaptopCode, faAngleRight];
 library.add(faIcons);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

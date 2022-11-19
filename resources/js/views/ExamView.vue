@@ -67,6 +67,9 @@ export default {
         this.setQuestions(response.data.questions);
       }).catch((error) => {
         console.error(error);
+        this.$router.push({
+          name: 'WELCOME_VIEW'
+        });
       });
     },
     setQuestions (questions) {

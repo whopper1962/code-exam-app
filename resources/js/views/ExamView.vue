@@ -86,6 +86,11 @@ export default {
           code: 'console.log("Hello Code-Exam!");'
         });
       }
+      axios.get('/api/exams').then((response) => {
+        console.log(response.data);
+      }).catch((error) => {
+        console.error(error);
+      });
     },
     submitExam () {
       console.error('Submitted!');

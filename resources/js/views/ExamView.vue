@@ -13,9 +13,10 @@
         :key="`exam_${index}`"
       >
         <h2 class="exam-title">{{ exam.title }}</h2>
-        <div class="exam-explanation-box">
-          {{ exam.explanation }}
-        </div>
+        <div
+          class="exam-explanation-box"
+          v-html="markdownToHtml(exam.explanation)"
+        />
         <template v-if="inputed[index]">
           <CodeEditor
             v-model="inputed[index].code"
@@ -43,6 +44,7 @@ import CodeEditor from '../components/CodeEditor';
 import ExamProgressBreadcrumbs from '../components/ExamProgressBreadcrumbs';
 import SubmitExamView from '../components/SubmitExamView';
 import AppTextarea from '../components/AppTextarea';
+import { marked } from 'marked';
 
 export default {
   components: {
@@ -69,7 +71,6 @@ export default {
       this.isLoading = true;
       axios.get(`/api/exams/${this.examId}`)
       .then((response) => {
-        console.log(response.data);
         this.setQuestions(response.data.questions);
       }).catch((error) => {
         console.error(error);
@@ -91,6 +92,9 @@ export default {
           code: question.default_code
         });
       }
+    },
+    markdownToHtml (markdown) {
+      return marked(markdown);
     },
     submitExam () {
       console.error('Submitted!');

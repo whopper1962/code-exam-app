@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\TextbookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,6 @@ use App\Http\Controllers\ExamController;
 // Exams
 Route::get('/exams', [ExamController::class, 'index']);
 Route::get('/exams/{exam_id}', [ExamController::class, 'getExamDetails']);
+
+// Textbooks
+Route::get('/textbooks', [TextbookController::class, 'index']);

@@ -1,7 +1,19 @@
 <template>
   <div>
     <template v-for="(textbook, index) in textbooks">
-      <p :key="`textbook_${index}`">{{ textbook.title }}</p>
+      <p :key="`textbook_${index}`">
+        {{ textbook.title }}
+        <router-link
+          :to="{
+            name: 'TEXTBOOK_VIEW',
+            params: {
+              textbook_id: textbook.id
+            }
+          }"
+        >
+          To details
+        </router-link>
+      </p>
     </template>
   </div>
 </template>

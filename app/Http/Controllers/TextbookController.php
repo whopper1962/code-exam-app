@@ -13,4 +13,11 @@ class TextbookController extends Controller
     ) {
         return $textbook->get();
     }
+
+    public function getDetails (
+        $textbook_id,
+        Textbook $textbook
+    ) {
+        return $textbook->find($textbook_id);
+    }
 }

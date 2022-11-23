@@ -28,3 +28,4 @@ Route::get('/exams/{exam_id}', [ExamController::class, 'getExamDetails']);
 
 // Textbooks
 Route::get('/textbooks', [TextbookController::class, 'index']);
+Route::get('/textbooks/{textbook_id}', [TextbookController::class, 'getDetails']);
